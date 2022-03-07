@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const reactionSchema = require('./Reaction');
 const dateFormat = require('../utils/dateFormat');
 
-const thoughtSchema = new Schema(
+const thoughtInfo = new Schema(
   {
     thoughtText: {
       type: String,
@@ -34,7 +34,7 @@ const thoughtSchema = new Schema(
 //creating virtual per readme file
 
 
-thoughtSchema.virtual('reactionCount').get(function() {
+thoughtInfo.virtual('reactionCount').get(function() {
   return this.reactions.length;
 });
 

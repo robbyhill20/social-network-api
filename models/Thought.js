@@ -1,43 +1,42 @@
-const { Schema, model } = require('mongoose');
-const reactionSchema = require('./Reaction');
-const dateFormat = require('../utils/dateFormat');
+const { Schema, model } = require("mongoose");
+const Reaction = require('./Reaction')
 
-const thoughtInfo = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
-      required: 'Thougts are Required',
-      //length between 1 and 280
-      minlength: 1,
-      maxlength: 280
+      required: true,
+      minLength: 1,
+      maxLength: 280,
     },
     createdAt: {
       type: Date,
-      //default date
       default: Date.now,
-     //getter method
-      get: timestamp => dateFormat(timestamp)
     },
+
     username: {
       type: String,
-      required: true
+      required: true,
     },
-    reactions: [reactionSchema]
+
+    reactions: [Reaction]
+
   },
   {
-    toJSON: {
-      getters: true
-    },
-    id: false
+      toJSON: {
+        virtuals: true
+      },
+      id: false
   }
 );
-//creating virtual per readme file
 
 
-thoughtInfo.virtual('reactionCount').get(function() {
-  return this.reactions.length;
-});
+thoughtSchema
+  .virtual('reactionCount')
+  .get(function () {
+      return this.reactions.length
+  });
 
-const Thought = model('Thought', thoughtSchema);
+const Thought = model('thought', thoughtSchema);
 
 module.exports = Thought;

@@ -1,5 +1,10 @@
 # social-network-api
 
+# Description
+This is the backend API setup for a social network app using various tools like mongodb and express. Users can be added, edited, and removed as well ass able to add friends. 
+
+# Installation 
+clone this repo and then npm install from your terminal. 
 
 # Demo Video
 
